@@ -1,20 +1,21 @@
+
 import java.awt.EventQueue;
 
-
-
 public class Test {
+
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static void main(String[] args) {
-		
-		
-		
-		System.out.println(System.getProperty("sun.arch.data.model"));
-		
-		
+		// TODO Auto-generated method stub
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new MyFrame();
+				new ObrazFrame();
 			}
 		});
 	}
+
 }

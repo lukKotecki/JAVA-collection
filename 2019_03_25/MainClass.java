@@ -1,4 +1,7 @@
+
+
 public class MainClass{
+	
 
   public static void main(String[] args){
     System.out.println(System.getProperty ("user.dir"));    
@@ -10,8 +13,9 @@ public class MainClass{
       System.out.println(Character.isWhitespace('\n'));
       System.out.println(Character.isWhitespace('\t'));
 	  
-	
-	
+	  {
+	FinalizeMethodTest klasaTestowa = new FinalizeMethodTest();
+	  }
 	
 	
 	

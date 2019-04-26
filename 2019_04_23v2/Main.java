@@ -8,22 +8,18 @@ import java.util.Vector;
 
 public class Main{
 	
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 640;
-	public static final int NUMBER_OF_PHOTOS = 3;
+	public static int WIDTH = 1024;
+	public static int HEIGHT = 640;
+	public static int NUMBER_OF_PHOTOS = 4;
+	public static int pixelSizeX = 15;
+	public static int pixelSizeY = 5;
 	
 	static BufferedImage outputImage = null;
+	static File outputFile = null;
 	
 	static Vector<BufferedImage> image = new Vector<BufferedImage>(NUMBER_OF_PHOTOS);
 	static Vector<File> file = new Vector<File>(NUMBER_OF_PHOTOS);
 	
-	static BufferedImage image_1 = null;
-	static BufferedImage image_2 = null;
-	static BufferedImage image_3 = null;
-	static File outputFile = null;
-	static File file_1 = null;
-	static File file_2 = null;
-	static File file_3 = null;
 	
 	static int positionX = 0;
 	static int positionY = 0;
@@ -38,17 +34,9 @@ public class Main{
 				outputImage = new BufferedImage(WIDTH,HEIGHT, BufferedImage.TYPE_INT_ARGB);
 				
 				for(int i = 0; i<NUMBER_OF_PHOTOS;i++){
-					file.add(i,new File("photo_"+(i+1)+".png"));// = new File("photo_"+i+".png");
-					image.add(i,ImageIO.read(file.get(i)));// = ImageIO.read(file.elementAt(i));
-					System.out.println(i);
+					file.add(i,new File("photo_"+(i+1)+".png"));
+					image.add(i,ImageIO.read(file.get(i)));
 				}
-				
-				// file_1 = new File("photo_1.png");
-				// image_1 = ImageIO.read(file_1);
-				// file_2 = new File("photo_2.png");
-				// image_2 = ImageIO.read(file_2);
-				// file_3 = new File("photo_3.png");
-				// image_3 = ImageIO.read(file_3);
 				
 				shouldReadAgain = false;
 			}catch(IOException e){
@@ -75,8 +63,6 @@ public class Main{
 	
 	static void writeImageToFile(BufferedImage imageToWrite){
 		try{
-			pixelRainbowPainter(outputImage);
-			
 			outputFile = new File("output.png");
 			ImageIO.write(imageToWrite,"png",outputFile);
 		}catch(IOException e){
@@ -100,25 +86,49 @@ public class Main{
 	
 	static void pixelRainbowPainter(BufferedImage img){
 		
-		int a=0;
+		int a=255;
 		int r=0;
 		int g=0;
 		int b=255;
-		int p=0;
+		
+		int p=0; //pixelColorToSet
+		
+		int xPositionOrder =0;
+		int yPositionOrder =0;
+		int imageToReadOrder =0;
+		
+		//nt endOfRow = 0;
 		
 		for(int y=0; y<HEIGHT; y++){
 			for(int x=0; x<WIDTH;x++){
 				
+				p = pixelARGBtoInt(a,r,g,b); //this is just for tests - coloring output.png
 				
-				p = image.get(0).getRGB(x,y);
+				imageToReadOrder = (xPositionOrder+yPositionOrder)%NUMBER_OF_PHOTOS;
 				
-				//p = pixelARGBtoInt(a,r,g,b);
-				
-				
-				
+				//p = image.get(imageToReadOrder).getRGB(x,y);
 				
 				img.setRGB(x,y,p);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				if(x%pixelSizeX ==0)
+					xPositionOrder++;
 			}
+			if(y%pixelSizeY ==0)
+				yPositionOrder++;
+			xPositionOrder = 0; //yPositionOrder not work correctly without this
 		}
 	}
 	
@@ -129,8 +139,8 @@ public class Main{
 		System.out.println("Witaj w Main 2019_04_23v2");
 		
 		prepareFiles();
+		pixelRainbowPainter(outputImage);
 		writeImageToFile(outputImage);
 		
-	
 	}
 }

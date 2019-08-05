@@ -102,11 +102,11 @@ public class Main{
 		for(int y=0; y<HEIGHT; y++){
 			for(int x=0; x<WIDTH;x++){
 				
-				p = pixelARGBtoInt(a,r,g,b); //this is just for tests - coloring output.png
+				//p = pixelARGBtoInt(a,r,g,b); //this is just for tests - coloring output.png
 				
 				imageToReadOrder = (xPositionOrder+yPositionOrder)%NUMBER_OF_PHOTOS;
 				
-				//p = image.get(imageToReadOrder).getRGB(x,y);
+				p = image.get(imageToReadOrder).getRGB(x,y);
 				
 				img.setRGB(x,y,p);
 				

@@ -1,0 +1,2 @@
+javac SwingControlDemo.java
+java SwingControlDemo
